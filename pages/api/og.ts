@@ -20,10 +20,11 @@ export default async function handler(
 
     const filteredData = {
       ogTitle: rawData.ogTitle,
+      ogDescription: rawData.ogDescription,
       ogUrl: rawData.ogUrl,
       ogImage: rawData.ogImage ? rawData.ogImage[0].url : null,
-      ogDescription: rawData.ogDescription,
-      ogCreator: rawData.ogArticleAuthor || rawData.twitterCreator,
+      ogCreator: rawData.ogArticleAuthor,
+      ogSiteName: rawData.ogSiteName,
     };
 
     return res.status(200).json(filteredData);

@@ -14,7 +14,7 @@ export default function Document() {
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="msapplication-TileColor" content="#141414" />
         <meta name="msapplication-tap-highlight" content="no" />
-        <meta name="theme-color" content="#141414" />
+        <meta name="theme-color" content="#EFEBE6" />
       </Head>
       <body>
         <Main />

@@ -6,3 +6,190 @@
   align-items: center
   padding: rem(170) rem(25)
   min-height: 100dvh
+
+  h1
+    width: rem(713)
+    height: rem(64)
+
+    span
+      +screen-reader-only
+
+    i
+      display: block
+      width: rem(713)
+      height: rem(64)
+
+  form
+    margin: rem(50) 0 rem(77)
+    max-width: rem(1070)
+    width: 100%
+    height: rem(77)
+
+    fieldset
+      display: flex
+      align-items: center
+      border-radius: rem(77)
+      padding: 0 rem(50)
+      gap: rem(25)
+      background-color: $hex-white
+      width: 100%
+      height: 100%
+
+      label
+        font-size: rem(36)
+        font-weight: 900
+        line-height: 1
+        color: $hex-accent
+
+      input
+        +col
+        border: 0
+        padding: 0
+        background-color: transparent
+        font-size: rem(36)
+        font-weight: 200
+        line-height: 1
+
+      button
+        background-color: transparent
+        border: 1px solid $hex-deepnight
+        border-radius: 100%
+        width: rem(48)
+        height: rem(48)
+
+        span
+          +screen-reader-only
+
+        i
+          display: inline-block
+          width: rem(16)
+          height: rem(16)
+
+  .og
+    display: flex
+    flex-direction: column
+    max-width: rem(1070)
+    gap: rem(25)
+    margin-bottom: rem(120)
+    width: 100%
+
+    nav
+      ul
+        display: flex
+        gap: rem(15)
+
+        li
+          button
+            position: relative
+            padding: rem(12) rem(15)
+            font-size: rem(24)
+            line-height: 1
+            color: $hex-dark
+
+            &::after
+              content: ''
+              display: block
+              position: absolute
+              bottom: 0
+              left: 0
+              width: 100%
+              height: rem(2)
+
+            &.active
+              font-weight: 700
+              color: $hex-accent
+
+              &::after
+                background-color: $hex-accent
+
+    .og-preview
+      display: flex
+      gap: rem(15)
+
+      .thumbnail
+        +coln
+        width: rem(166)
+
+      .ogInfo
+        display: flex
+        flex-direction: column
+
+        cite
+          font-size: rem(14)
+          font-weight: 300
+          line-height: 1
+          color: $hex-night
+
+        h2
+          margin: rem(15) 0 rem(5)
+          font-size: rem(20)
+          font-weight: 700
+          line-height: 1.3
+          color: $hex-dark
+
+        p
+          font-size: rem(16)
+          line-height: 1.375
+
+    .og-raw
+      padding: rem(15)
+      background-color: $code-bg
+      font-family: monospace
+
+      span
+        display: inline-block
+        fint-size: rem(16)
+        line-height: 1.5
+
+      .operator
+        color: $code-operator
+
+      .props
+        padding-left: rem(18)
+        color: $code-props
+
+      .value
+        color: $code-value
+
+  .para
+    display: flex
+    flex-direction: column
+    align-items: center
+
+    .parapara
+      display: flex
+      flex-direction: column
+      gap: rem(50)
+
+    div
+      display: flex
+      flex-direction: column
+      align-items: flex-start
+      gap: rem(12)
+
+      &.caution
+        color: $hex-danger
+
+      &.notice
+        color: $hex-deep
+
+      h2
+        font-size: rem(24)
+        font-weight: 900
+        letter-spacing: rem(2)
+
+      ul
+        list-style: disc
+        margin-left: rem(16)
+        padding-left: rem(8)
+        font-size: rem(20)
+        font-weight: 500
+        letter-spacing: rem(-1)
+        line-height: 1.3
+        color: $hex-dark
+
+        li
+          margin: rem(5) 0
+
+          span
+            display: block

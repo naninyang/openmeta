@@ -11,7 +11,7 @@ export const hex: { [key: string]: string } = {
   code_bg: '#212121',
   code_props: '#AADAFA',
   code_value: '#C5947C',
-  code_misc: '#DCDCDC',
+  code_operator: '#DCDCDC',
 };
 
 export const mq = {

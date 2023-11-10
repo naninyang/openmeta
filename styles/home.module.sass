@@ -210,14 +210,21 @@
       padding: rem(10)
       background-color: $code-bg
       font-family: monospace
+      white-space-collapse: preserve
+      overflow: auto
 
       +mq(minLarge)
         padding: rem(15)
 
+      div
+        text-wrap: wrap
+        visibility: visible
+        text-align: start
+
       span
-        display: inline-block
         fint-size: rem(14)
         line-height: 1.5
+        word-break: keep-all
 
         +mq(minLarge)
           fint-size: rem(16)

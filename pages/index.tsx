@@ -73,7 +73,7 @@ export default function Home() {
     <>
       <Seo
         pageDescription="UX 디자인 & 웹퍼블리싱 O612 고아리의 포트폴리오"
-        pageImg={`https://dev1stud.io/images/og-image.png?ts=${timestamp}`}
+        pageImg={`https://openmeta.dev1stud.io/images/open-graph.png?ts=${timestamp}`}
       />
       <main className={styles.openmeta}>
         <h1>

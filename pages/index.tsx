@@ -84,6 +84,7 @@ export default function Home() {
               id="url"
               type="url"
               value={url}
+              autoComplete="url"
               onChange={(e) => setUrl(e.target.value)}
               placeholder={`${isDesktop ? 'http 또는 https를 포함한 주소를 입력해 주세요' : '주소 입력'}`}
               required

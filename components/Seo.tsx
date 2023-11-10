@@ -22,11 +22,11 @@ const Seo = ({ pageTitle, pageDescription, pageImg, pageImgWidth, pageImgHeight,
   const ogTitle = pageTitle || defaultTitle;
   const description = pageDescription || defaultDescription;
   const url = `${domain}${pagePath}`;
-  const defaultImg = `${domain}/images/og-image.png`;
+  const defaultImg = `${domain}/open-graph.png`;
   const imgUrl = pageImg || defaultImg;
   const imgWidth = pageImgWidth || 1280;
   const imgHeight = pageImgHeight || 630;
-  const ogType = pageOgType || 'website';
+  const ogType = pageOgType || 'object';
 
   return (
     <Head>

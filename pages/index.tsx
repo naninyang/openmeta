@@ -71,10 +71,7 @@ export default function Home() {
   const timestamp = Date.now();
   return (
     <>
-      <Seo
-        pageDescription="UX 디자인 & 웹퍼블리싱 O612 고아리의 포트폴리오"
-        pageImg={`https://openmeta.dev1stud.io/open-graph.png?ts=${timestamp}`}
-      />
+      <Seo />
       <main className={styles.openmeta}>
         <h1>
           <span>오픈메타 : 메타앤오픈그래프</span>

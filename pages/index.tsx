@@ -67,8 +67,6 @@ export default function Home() {
       console.error('Error fetching Opengraph data:', error);
     }
   };
-
-  const timestamp = Date.now();
   return (
     <>
       <Seo />

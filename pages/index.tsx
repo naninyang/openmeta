@@ -275,7 +275,7 @@ export default function Home() {
           </div>
         </div>
         <p className={styles.copyright}>
-          Copyrights <AnchorLink href="https://dev1stud.io">DEV1L.studio</AnchorLink>{' '}
+          &copy;Copyrights <AnchorLink href="https://dev1stud.io">DEV1L.studio</AnchorLink>{' '}
           <AnchorLink href="https://github.com/naninyang">@O612</AnchorLink>
         </p>
       </main>

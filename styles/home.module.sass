@@ -138,6 +138,9 @@
             line-height: 1
             color: $hex-dark
 
+            &:disabled
+              cursor: default
+
             +mq(minLarge)
               padding: rem(12) rem(15)
               font-size: rem(24)
@@ -229,12 +232,12 @@
         text-align: start
 
       span
-        fint-size: rem(14)
+        font-size: rem(14)
         line-height: 1.5
         word-break: keep-all
 
         +mq(minLarge)
-          fint-size: rem(16)
+          font-size: rem(16)
 
       .operator
         color: $code-operator

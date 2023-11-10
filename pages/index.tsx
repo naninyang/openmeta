@@ -6,6 +6,7 @@ import { images } from '@/images';
 import Seo from '@/components/Seo';
 import styled from '@emotion/styled';
 import styles from '@/styles/home.module.sass';
+import AnchorLink from '@/components/AnchorLink';
 
 type OpengraphData = {
   ogTitle: string;
@@ -265,6 +266,10 @@ export default function Home() {
                 </li>
                 <li>og:image:secure_url이 있을 때는 og:image가 아닌 og:image:secure_url을 가져옵니다.</li>
                 <li>속도가 다소 느립니다.</li>
+                <li>
+                  개발코드는 <AnchorLink href="https://github.com/naninyang/openmeta">여기</AnchorLink>를 참조하세요.{' '}
+                  <span>(next.js 환경에서 개발되었습니다.)</span>
+                </li>
               </ul>
             </div>
           </div>

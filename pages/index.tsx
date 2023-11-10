@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import axios from 'axios';
+import { useMediaQuery } from 'react-responsive';
 import { images } from '@/images';
 import Seo from '@/components/Seo';
 import styled from '@emotion/styled';
@@ -38,10 +39,20 @@ const Search = styled.i({
   background: `url(${images.search}) no-repeat 50% 50%/contain`,
 });
 
+export function useDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false);
+  const desktop = useMediaQuery({ query: '(min-width: 992px)' });
+  useEffect(() => {
+    setIsDesktop(desktop);
+  }, [desktop]);
+  return isDesktop;
+}
+
 export default function Home() {
   const [url, setUrl] = useState('');
   const [opengraphData, setOpengraphData] = useState<OpengraphData | null>(null);
   const [isActive, setIsActive] = useState(true);
+  const isDesktop = useDesktop();
 
   const toggleActive = () => {
     setIsActive(!isActive);
@@ -78,7 +89,7 @@ export default function Home() {
               type="url"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              placeholder="http 또는 https를 포함한 주소를 입력해 주세요"
+              placeholder={`${isDesktop ? 'http 또는 https를 포함한 주소를 입력해 주세요' : '주소 입력'}`}
               required
             />
             <button type="submit">

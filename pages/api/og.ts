@@ -15,25 +15,33 @@ async function fetchOpenGraphData(url: string) {
   let data = iconv.decode(response.data, charset);
 
   let $ = cheerio.load(data);
-  const ogUrl = $('meta[property="og:url"]').attr("content");
+  const ogUrl =
+    $('meta[property="og:url"]').attr("content") ||
+    $('meta[name="url"]').attr("content");
   const ogTitle =
     $('meta[property="og:title"]').attr("content") || $("title").html();
   const ogDescription =
     $('meta[property="og:description"]').attr("content") ||
     $('meta[name="description"]').attr("content");
-  const ogImage = $('meta[property="og:image"]').attr("content");
+  const ogType = $('meta[property="og:type"]').attr("content");
+  const ogImage =
+    $('meta[property="og:image:secure_url"]').attr("content") ||
+    $('meta[property="og:image"]').attr("content");
   const ogArticleAuthor =
     $('meta[property="og:article:author"]').attr("content") ||
     $('meta[name="author"]').attr("content");
   const ogSiteName = $('meta[property="og:site_name"]').attr("content");
+  const twitterCard = $('meta[name="twitter:card"]').attr("content");
 
   return {
     ogUrl,
     ogTitle,
     ogDescription,
+    ogType,
     ogImage,
     ogArticleAuthor,
     ogSiteName,
+    twitterCard,
   };
 }
 

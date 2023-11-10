@@ -11,6 +11,7 @@ interface Props {
 }
 
 const Seo = ({ pageTitle, pageDescription, pageImg, pageImgWidth, pageImgHeight, pageOgType }: Props) => {
+  const timestamp = Date.now();
   const router = useRouter();
   const pagePath = router.asPath;
   const domain = 'https://openmeta.dev1stud.io';
@@ -22,7 +23,7 @@ const Seo = ({ pageTitle, pageDescription, pageImg, pageImgWidth, pageImgHeight,
   const ogTitle = pageTitle || defaultTitle;
   const description = pageDescription || defaultDescription;
   const url = `${domain}${pagePath}`;
-  const defaultImg = `${domain}/open-graph.png`;
+  const defaultImg = `${domain}/open-graph.png?ts=${timestamp}`;
   const imgUrl = pageImg || defaultImg;
   const imgWidth = pageImgWidth || 1280;
   const imgHeight = pageImgHeight || 630;

@@ -51,6 +51,8 @@ export function useDesktop() {
 
 export default function Home() {
   const [url, setUrl] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [opengraphData, setOpengraphData] = useState<OpengraphData | null>(null);
   const [isActive, setIsActive] = useState(true);
   const isDesktop = useDesktop();
@@ -61,11 +63,18 @@ export default function Home() {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    setLoading(true);
+    setError('');
     try {
       const response = await axios.get(`/api/og?url=${encodeURIComponent(url)}`);
       setOpengraphData(response.data);
     } catch (error) {
-      console.error('Error fetching Opengraph data:', error);
+      //  console.error('Error fetching Opengraph data:', error);
+      setError(
+        `<p>데이터를 불러오는데 실패했습니다.</p><p>URL에 오타가 있거나 검색하고자 하는 서버 혹은 페이지에 오류가 있을 수 있습니다.</p>`,
+      );
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -73,7 +82,7 @@ export default function Home() {
       <Seo />
       <main className={styles.openmeta}>
         <h1>
-          <span>오픈메타 : 메타앤오픈그래프</span>
+          <span>오픈메타 : 메타앤오픈그래프 (링크미리보기)</span>
           <Logotypo />
         </h1>
         <form onSubmit={handleSubmit}>
@@ -95,7 +104,14 @@ export default function Home() {
             </button>
           </fieldset>
         </form>
-        {opengraphData && (
+        {loading && (
+          <p className={styles.loading}>
+            <span>로딩 중</span>
+            <i />
+          </p>
+        )}
+        {error && <p className={styles.error} dangerouslySetInnerHTML={{ __html: error }} />}
+        {!loading && !error && opengraphData && (
           <div className={styles.og}>
             <nav>
               <ul>

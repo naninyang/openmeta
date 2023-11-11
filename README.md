@@ -1,40 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# openmeta - META&&OPENGRAPH
 
-## Getting Started
+오픈메타: 링크 미리보기 서비스
 
-First, run the development server:
+## 서비스 내에서 사용방법
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+오픈그래프 내용을 보고자 하는 웹페이지의 주소를 http:// 또는 https:// 포함하여 주소를 입력하세요.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+미리보기, Raw Data를 확인하실 수 있습니다.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## 코드 가져가는 방법
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+`next.js` 기준으로 작성되어 있습니다.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+`App Router`가 아닌 `Pages Router` 기준으로 작성되어 있으니 유념해 주세요.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+코드는 `/pages/api/og.ts`를 참조하시면 됩니다.
 
-## Learn More
+`TypeScript`를 사용하였고, JavaScript 버전은 따로 없습니다.
 
-To learn more about Next.js, take a look at the following resources:
+만약 자신이 `Next.js`에 막 입문하여 데이터를 가져오는 방법, 로딩 중 인디케이터, 에러 등의 구현 방법을 잘 모른다면 `/pages/index.tsx`를 참조하세요.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## iconv 사용
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+`iconv`를 사용하여 구현하였으므로 `EUC`로 시작하는 인코딩을 `UTF-8` 인코딩으로 변환하여 가져옵니다.
 
-## Deploy on Vercel
+`iconv-lite` 패키지를 사용하여 `iconv`를 가져왔습니다.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 유의사항
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- 데이터를 가져오고자 하는 서버 상태에 따라서 속도가 느릴 수 있습니다.
+
+- 네트워크 상태에 따라 속도가 느릴 수 있습니다.
+
+- 따라서, 로딩 인디케이터가 너무 오래 지속된다면 서버 상태 또는 네트워크 상태를 확인해 보세요.
+
+- Client-side Redering(CSR) 기반으로 동작하는 웹페이지는 데이터를 가져올 수 없습니다.
+
+- 프론트엔드 화면의 UX 디자인의 저작권 O612(Chloe)에게 있습니다. 무단 도용을 허가하지 않습니다.
+
+## 안내사항
+
+- og.ts 파일의 코드를 가져가서 사용시 프로젝트에 따라 코드를 수정하여 사용해도 무방합니다.
+
+- SEO에 필요한 meta 태그값들과 알려진 OG 값들, 그리고 Twitter Card 값들은 다 넣으려고 노력했습니다.
+
+- 만약 그 외에 더 필요한 값들이 있다면 이슈 등록하여 알려주세요.

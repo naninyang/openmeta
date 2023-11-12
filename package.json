@@ -13,7 +13,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.11.0",
-    "axios": "^1.5.1",
+    "axios": "^1.6.0",
     "cheerio": "1.0.0-rc.12",
     "iconv-lite": "^0.6.3",
     "next": "13.5.6",

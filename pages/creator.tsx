@@ -27,6 +27,7 @@ type OpengraphData = {
   ownerName?: string;
   ownerAvatar?: string;
   pressAvatar?: string;
+  pressPublished?: string;
 };
 
 const Caution = styled.i({
@@ -252,6 +253,13 @@ export default function Creator() {
                     <span className={styles.props}>datePublished</span>
                     <span className={styles.operator}>:</span>{' '}
                     <span className={styles.value}>{opengraphData.datePublished}</span>
+                  </div>
+                )}
+                {opengraphData.pressPublished && (
+                  <div>
+                    <span className={styles.props}>pressPublished</span>
+                    <span className={styles.operator}>:</span>{' '}
+                    <span className={styles.value}>{opengraphData.pressPublished}</span>
                   </div>
                 )}
                 {opengraphData.ownerUrl && (

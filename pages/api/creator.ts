@@ -30,11 +30,20 @@ async function fetchOpenGraphData(url: string) {
   const twitterImage = $('meta[name="twitter:image"]').attr('content');
   const twitterDescription = $('meta[name="twitter:description"]').attr('content');
   const datePublished = $('meta[itemprop="datePublished"]').attr('content');
+  const dateTime = $('span.media_end_head_info_datestamp_time').attr('data-date-time');
   const ownerUrl = $('link[itemprop="url"][href^="http://www.youtube.com/@"]').attr('href');
   const ownerName = $('link[itemprop="name"]').attr('content');
   const ownerAvatar = ownerUrl ? await fetchAvatar(ownerUrl) : null;
   const pressUrl = $('a[class="media_end_linked_more_link"]').attr('href');
   const pressAvatar = pressUrl ? await fetchAvatar(pressUrl) : null;
+
+  const dateObject = dateTime && new Date(dateTime + 'Z');
+  let isoDateTime = dateObject && dateObject.toISOString();
+  const koreaOffset = 9;
+  let koreaTime = dateObject && new Date(dateObject.getTime() + koreaOffset * 60 * 60 * 1000);
+  isoDateTime = koreaTime && koreaTime.toISOString().replace('.000', '');
+  const pressPublished = isoDateTime;
+
   return {
     ogUrl,
     ogTitle,
@@ -54,6 +63,7 @@ async function fetchOpenGraphData(url: string) {
     ownerName,
     ownerAvatar,
     pressAvatar,
+    pressPublished,
   };
 }
 
@@ -93,6 +103,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       ownerName: rawData.ownerName,
       ownerAvatar: rawData.ownerAvatar,
       pressAvatar: rawData.pressAvatar,
+      pressPublished: rawData.pressPublished,
     };
     return res.status(200).json(filteredData);
   } catch (error) {

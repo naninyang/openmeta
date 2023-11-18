@@ -1,18 +1,33 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
-import iconv from 'iconv-lite';
 import cheerio from 'cheerio';
+import ogs from 'open-graph-scraper';
 
+async function fetchOwnerAvatar(ownerUrl: string) {
+  const options = { url: ownerUrl };
+  try {
+    const { result } = await ogs(options);
+    const ownerAvatar = result.ogImage?.[0]?.url;
+    return ownerAvatar;
+  } catch (error) {
+    console.error('Error fetching owner avatar with ogs:', error);
+    return null;
+  }
+}
+async function fetchPressAvatar(pressUrl: string) {
+  const options = { url: pressUrl };
+  try {
+    const { result } = await ogs(options);
+    const pressAvatar = result.ogImage?.[0]?.url;
+    return pressAvatar;
+  } catch (error) {
+    console.error('Error fetching press avatar with ogs:', error);
+    return null;
+  }
+}
 async function fetchOpenGraphData(url: string) {
-  const response = await axios.get(url, { responseType: 'arraybuffer' });
-  const html = iconv.decode(response.data, 'UTF-8');
-  const $$ = cheerio.load(html);
-  const contentType = $$('meta[http-equiv="Content-Type"]').attr('content');
-  const charset = contentType?.includes('charset=') ? contentType.split('charset=')[1] : 'UTF-8';
-
-  let data = iconv.decode(response.data, charset);
-  let $ = cheerio.load(data);
-
+  const response = await axios.get(url);
+  const $ = cheerio.load(response.data);
   const ogUrl = $('meta[property="og:url"]').attr('content') || $('meta[name="url"]').attr('content');
   const ogTitle = $('meta[property="og:title"]').attr('content') || $('title').html();
   const ogDescription =
@@ -33,9 +48,17 @@ async function fetchOpenGraphData(url: string) {
   const dateTime = $('span.media_end_head_info_datestamp_time').attr('data-date-time');
   const ownerUrl = $('link[itemprop="url"][href^="http://www.youtube.com/@"]').attr('href');
   const ownerName = $('link[itemprop="name"]').attr('content');
-  const ownerAvatar = ownerUrl ? await fetchAvatar(ownerUrl) : null;
   const pressUrl = $('a[class="media_end_linked_more_link"]').attr('href');
-  const pressAvatar = pressUrl ? await fetchAvatar(pressUrl) : null;
+
+  let ownerAvatar = null;
+  let pressAvatar = null;
+
+  if (ownerUrl) {
+    ownerAvatar = await fetchOwnerAvatar(ownerUrl);
+  }
+  if (pressUrl) {
+    pressAvatar = await fetchPressAvatar(pressUrl);
+  }
 
   const dateObject = dateTime && new Date(dateTime + 'Z');
   let isoDateTime = dateObject && dateObject.toISOString();
@@ -65,19 +88,6 @@ async function fetchOpenGraphData(url: string) {
     pressAvatar,
     pressPublished,
   };
-}
-
-async function fetchAvatar(ownerUrl: any) {
-  try {
-    const response = await axios.get(ownerUrl, { responseType: 'arraybuffer' });
-    const html = iconv.decode(response.data, 'UTF-8');
-    const $ = cheerio.load(html);
-    const ownerAvatar = $('meta[property="og:image"]').attr('content');
-    return ownerAvatar;
-  } catch (error) {
-    console.error('Error fetching owner avatar:', error);
-    return null;
-  }
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

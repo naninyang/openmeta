@@ -71,7 +71,7 @@ export default function Home() {
     } catch (error) {
       //  console.error('Error fetching Opengraph data:', error);
       setError(
-        `<p>데이터를 불러오는데 실패했습니다.</p><p>URL에 오타가 있거나 검색하고자 하는 서버 혹은 페이지에 오류가 있을 수 있습니다.</p>`,
+        `<p>데이터를 불러오는데 실패했습니다.</p><p>URL에 오타가 있거나 검색하고자 하는 서버 혹은 웹사이트/페이지에 오류가 있을 수 있습니다.</p>`,
       );
     } finally {
       setLoading(false);
@@ -260,6 +260,7 @@ export default function Home() {
                 <li>
                   CSR(Client-side Rendering) 즉, JavaScript로 화면을 그리는 웹사이트는 Meta 태그를 가져올 수 없습니다.
                 </li>
+                <li>SSL 연결 또는 SSL 인증서에 문제가 있는 웹사이트는 보안 문제로 이용하실 수 없습니다.</li>
               </ul>
             </div>
             <div className={styles.notice}>

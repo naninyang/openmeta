@@ -1,18 +1,16 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import axios from 'axios';
 import iconv from 'iconv-lite';
 import cheerio from 'cheerio';
 
 async function fetchOpenGraphData(url: string) {
-  const response = await axios.get(url, { responseType: 'arraybuffer' });
-  const html = iconv.decode(response.data, 'UTF-8');
+  const response = await fetch(url as string);
+  const buffer = await response.arrayBuffer();
+  const html = iconv.decode(Buffer.from(buffer), 'UTF-8');
   const $$ = cheerio.load(html);
   const contentType = $$('meta[http-equiv="Content-Type"]').attr('content');
   const charset = contentType?.includes('charset=') ? contentType.split('charset=')[1] : 'UTF-8';
-
-  let data = iconv.decode(response.data, charset);
-
-  let $ = cheerio.load(data);
+  const data = iconv.decode(Buffer.from(buffer), charset);
+  const $ = cheerio.load(data);
   const ogUrl = $('meta[property="og:url"]').attr('content') || $('meta[name="url"]').attr('content');
   const ogTitle = $('meta[property="og:title"]').attr('content') || $('title').html();
   const ogDescription =

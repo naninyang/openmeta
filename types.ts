@@ -1,0 +1,21 @@
+export type OpengraphData = {
+  ogTitle: string;
+  ogDescription: string;
+  ogUrl?: string;
+  ogImage?: string;
+  ogCreator?: string;
+  ogSiteName?: string;
+  ogType?: string;
+  twitterCard?: string;
+  twitterSite?: string;
+  twitterTitle?: string;
+  twitterCreator?: string;
+  twitterImage?: string;
+  twitterDescription?: string;
+  datePublished?: string;
+  ownerUrl?: string;
+  ownerName?: string;
+  ownerAvatar?: string;
+  pressAvatar?: string;
+  pressPublished?: string;
+};

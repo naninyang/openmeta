@@ -1,34 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import axios from 'axios';
 import { useMediaQuery } from 'react-responsive';
+import { OpengraphData } from '@/types';
 import { images } from '@/images';
 import Seo from '@/components/Seo';
 import styled from '@emotion/styled';
 import styles from '@/styles/home.module.sass';
 import AnchorLink from '@/components/AnchorLink';
-
-type OpengraphData = {
-  ogTitle: string;
-  ogDescription: string;
-  ogUrl?: string;
-  ogImage?: string;
-  ogCreator?: string;
-  ogSiteName?: string;
-  ogType?: string;
-  twitterCard?: string;
-  twitterSite?: string;
-  twitterTitle?: string;
-  twitterCreator?: string;
-  twitterImage?: string;
-  twitterDescription?: string;
-  datePublished?: string;
-  ownerUrl?: string;
-  ownerName?: string;
-  ownerAvatar?: string;
-  pressAvatar?: string;
-  pressPublished?: string;
-};
 
 const Caution = styled.i({
   background: `url(${images.caution}) no-repeat 50% 50%/contain`,
@@ -72,10 +50,10 @@ export default function Creator() {
     setLoading(true);
     setError('');
     try {
-      const response = await axios.get(`/api/creator?url=${encodeURIComponent(url)}`);
-      setOpengraphData(response.data);
+      const response = await fetch(`/api/creator?url=${encodeURIComponent(url)}`);
+      const responseData = await response.json();
+      setOpengraphData(responseData);
     } catch (error) {
-      //  console.error('Error fetching Opengraph data:', error);
       setError(
         `<p>데이터를 불러오는데 실패했습니다.</p><p>URL에 오타가 있거나 검색하고자 하는 서버 혹은 페이지에 오류가 있을 수 있습니다.</p>`,
       );
@@ -83,6 +61,7 @@ export default function Creator() {
       setLoading(false);
     }
   };
+
   return (
     <>
       <Seo />
